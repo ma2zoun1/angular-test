@@ -1,0 +1,74 @@
+
+
+<form [formGroup]="Empregister" (ngSubmit)="HandleSubmit()">    
+
+<mat-stepper [linear]="isLinear" #stepper>
+    
+    <mat-step [stepControl]="basicForm" >
+      <div formGroupName="basic">
+        <ng-template matStepLabel>Fill Basic Details</ng-template>
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder=" First name" formControlName="firstname" required>
+        </mat-form-field>
+       
+        <div>
+          <button  mat-raised-button color="primary" matStepperNext (click)="generateNumber()">Next</button>
+         
+
+        </div>
+    </div>
+    </mat-step>
+
+
+    <mat-step  label="Fill Verify Code" [stepControl]="verifyForm" >
+      <div formGroupName="verify">
+        <mat-form-field>
+          <mat-label>Verification Code</mat-label>
+          <input matInput formControlName="verify" placeholder="Verification Code" [(ngModel)]="verifytext" required >
+        </mat-form-field>
+        
+            
+        <div>
+          <button mat-raised-button color="primary" matStepperPrevious >Back</button>
+          <button mat-raised-button color="primary" matStepperNext class="ms-3">Submit</button>
+        </div>
+    </div>
+    
+
+
+    <div class="container text-center mt-4">
+        <div class="row justify-content-center">
+          
+            <div class="badge bg-success text-wrap" style="width: auto;">
+                Verification Code : {{ randomNumber }}
+               </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+          
+            <div class="badge text-wrap row" style="width: auto;">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="alert">
+                    <strong>Vierified Wrong!</strong> Please enter correct verifictation number.
+                    <button type="button" (click)="closeAlert()" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                   <pre></pre>
+                    <div>
+                        <button type="button" class="btn btn-primary" (click)="generateNumber()">Resend Verificat</button>
+
+                      </div>
+                   
+                  </div>
+                  
+                  <!-- <button type="button" (click)="closeAlert()" class="btn-primary" data-bs-dismiss="alert" aria-label="Close">Send Again</button> -->
+              </div>
+        </div>
+      </div>
+  
+    </mat-step>
+ 
+
+
+    
+
+  </mat-stepper>
+
+</form>
